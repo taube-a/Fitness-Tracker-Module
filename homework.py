@@ -1,5 +1,5 @@
 from dataclasses import dataclass, asdict
-from typing import List, Union, Dict, Type
+from typing import List, Union, Dict, Type, ClassVar
 
 
 MIN_IN_HOUR = 60
@@ -28,8 +28,8 @@ class Training:
     action: int
     duration: float
     weight: float
-    LEN_STEP = 0.65
-    M_IN_KM = 1000
+    LEN_STEP: ClassVar = 0.65
+    M_IN_KM: ClassVar = 1000
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
@@ -56,8 +56,8 @@ class Training:
 @dataclass
 class Running(Training):
     """Тренировка: бег."""
-    COEFF_CALORIE_1 = 18
-    COEFF_CALORIE_2 = 20
+    COEFF_CALORIE_1: ClassVar = 18
+    COEFF_CALORIE_2: ClassVar = 20
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
@@ -71,8 +71,8 @@ class Running(Training):
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
     height: int
-    COEFF_CALORIE_1 = 0.035
-    COEFF_CALORIE_2 = 0.029
+    COEFF_CALORIE_1: ClassVar = 0.035
+    COEFF_CALORIE_2: ClassVar = 0.029
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
@@ -87,9 +87,9 @@ class Swimming(Training):
     """Тренировка: плавание."""
     length_pool: float
     count_pool: int
-    LEN_STEP: int = 1.38
-    COEFF_CALORIE_1 = 1.1
-    COEFF_CALORIE_2 = 2
+    LEN_STEP: ClassVar = 1.38
+    COEFF_CALORIE_1: ClassVar = 1.1
+    COEFF_CALORIE_2: ClassVar = 2
 
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
@@ -132,4 +132,4 @@ if __name__ == '__main__':
             training = read_package(workout_type.upper(), data)
             main(training)
         except TypeError:
-            print('Ошибка! Проверье корректность кода тренировки или передаваемых данных')
+            print('Ошибка! Проверье корректность кода тренировки или передаваемых данных.')
