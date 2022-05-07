@@ -61,7 +61,9 @@ class Running(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        return ((self.COEFF_CALORIE_1 * self.get_mean_speed() - self.COEFF_CALORIE_2)
+        return ((self.COEFF_CALORIE_1
+                 * self.get_mean_speed()
+                 - self.COEFF_CALORIE_2)
                 * self.weight
                 / self.M_IN_KM
                 * (self.duration * MIN_IN_HOUR))
@@ -100,7 +102,8 @@ class Swimming(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        return ((self.get_mean_speed() + self.COEFF_CALORIE_1)
+        return ((self.get_mean_speed()
+                 + self.COEFF_CALORIE_1)
                 * self.COEFF_CALORIE_2
                 * self.weight)
 
@@ -132,4 +135,4 @@ if __name__ == '__main__':
             training = read_package(workout_type.upper(), data)
             main(training)
         except TypeError:
-            print('Ошибка! Проверье корректность кода тренировки или передаваемых данных.')
+            print('Ошибка в коде тренировки или передаваемых данных.')
