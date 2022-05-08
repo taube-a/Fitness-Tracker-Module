@@ -1,5 +1,5 @@
 from dataclasses import dataclass, asdict
-from typing import List, Union, Dict, Type, ClassVar, Final
+from typing import List, Union, Dict, Type, ClassVar
 
 
 @dataclass
@@ -22,8 +22,8 @@ class InfoMessage:
 
 class Training:
     """Базовый класс тренировки."""
-    M_IN_KM: Final[int] = 1000
-    MIN_IN_HOUR: Final[int] = 60
+    M_IN_KM: ClassVar[int] = 1000
+    MIN_IN_HOUR: ClassVar[int] = 60
     LEN_STEP: ClassVar[float] = 0.65
 
     def __init__(self,
@@ -58,8 +58,8 @@ class Training:
 
 class Running(Training):
     """Тренировка: бег."""
-    COEFF_CALORIE_1: Final[int] = 18
-    COEFF_CALORIE_2: Final[int] = 20
+    COEFF_CALORIE_1: ClassVar[int] = 18
+    COEFF_CALORIE_2: ClassVar[int] = 20
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
@@ -70,8 +70,8 @@ class Running(Training):
 
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
-    COEFF_CALORIE_1: Final[float] = 0.035
-    COEFF_CALORIE_2: Final[float] = 0.029
+    COEFF_CALORIE_1: ClassVar[float] = 0.035
+    COEFF_CALORIE_2: ClassVar[float] = 0.029
 
     def __init__(self,
                  action: int,
@@ -85,15 +85,15 @@ class SportsWalking(Training):
         """Получить количество затраченных калорий."""
         return ((self.COEFF_CALORIE_1 * self.weight
                  + (self.get_mean_speed() ** 2 // self.height)
-                 * self.COEFF_CALORIE_2 * self.weight)
-                * self.duration * self.MIN_IN_HOUR)
+                 * self.COEFF_CALORIE_2 * self.weight) * self.duration
+                * self.MIN_IN_HOUR)
 
 
 class Swimming(Training):
     """Тренировка: плавание."""
     LEN_STEP: ClassVar[float] = 1.38
-    COEFF_CALORIE_1: Final[float] = 1.1
-    COEFF_CALORIE_2: Final[int] = 2
+    COEFF_CALORIE_1: ClassVar[float] = 1.1
+    COEFF_CALORIE_2: ClassVar[int] = 2
 
     def __init__(self,
                  action: int,
